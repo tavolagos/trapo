@@ -103,8 +103,15 @@ nav.links a{text-decoration:none}
 .spec-legend i.line{background:none;border-top:1.6px dashed var(--ink);height:0;border-radius:0;opacity:1}
 
 /* ---- the big knob ---- */
-.thick{margin-top:34px;padding:34px;display:grid;grid-template-columns:330px 1fr;gap:44px;align-items:center}
-@media (max-width:860px){ .thick{grid-template-columns:1fr;padding:24px} }
+.pg{margin-top:34px;padding:30px 34px 28px}
+.pg-main{display:grid;grid-template-columns:300px 1fr;gap:40px;align-items:center;margin-top:26px}
+.pg-foot{display:grid;grid-template-columns:300px 1fr;gap:40px;align-items:center;margin-top:18px}
+.pg-foot .spec-wrap{margin-top:0}
+.pg .fabric-text{margin-top:16px;min-height:4.6em}
+.pg .demo-pic img{transition:opacity .08s linear;transform:none}
+.pg .demo-pic.fading img{opacity:0 !important;transition:opacity .14s ease}
+@media (max-width:860px){ .pg{padding:22px} .pg-main,.pg-foot{grid-template-columns:1fr;gap:18px} .pg .chips{grid-template-columns:repeat(5,minmax(0,1fr))} }
+@media (max-width:560px){ .pg .chip{font-size:0;gap:0;justify-content:center;padding:8px 0} .pg .chip svg{margin:0} }
 .knobbox{text-align:center}
 .knobbox .label{font-style:italic;font-size:26px}
 .bigknob{width:230px;height:230px;margin:8px auto 0;display:block;cursor:grab;touch-action:none;border-radius:50%;outline:none}
@@ -115,8 +122,8 @@ nav.links a{text-decoration:none}
 .readout{font-size:24px;margin-top:6px;font-variant-numeric:tabular-nums}
 .readout small{color:var(--muted);font-size:18px;font-style:italic}
 .knob-hint{color:var(--muted);font-style:italic;font-size:16px;margin-top:4px}
-.thick .demo-pic img{transition:opacity .08s linear;transform:none}
-.thick .demo-controls{justify-content:center}
+.pg .demo-controls{justify-content:center}
+@media (min-width:861px){ .pg .chip{flex-direction:row;justify-content:center;gap:12px;padding:12px 10px;font-size:20px} .pg .chip svg{width:30px;height:30px} }
 .bigknob .arc-bg{stroke:var(--track)} .bigknob .arc-val{stroke:var(--accent)}
 .bigknob .cap-face{fill:var(--sheet);stroke:var(--ink)} .bigknob .cap-shadow{fill:var(--shadow)} .bigknob .pointer{stroke:var(--ink)}
 
@@ -215,7 +222,7 @@ nav.links a{text-decoration:none}
 .swap{transition:opacity .25s ease,transform var(--d-smooth) var(--spring-smooth)}
 .swap.out{opacity:0;transform:translateY(8px)}
 .demo-controls{display:flex;align-items:center;gap:18px;margin-top:24px;flex-wrap:wrap}
-.demo .meta,.tour .meta,.thick .meta{font-size:16px;color:var(--muted);font-style:italic;margin-top:14px}
+.demo .meta,.tour .meta,.pg .meta{font-size:16px;color:var(--muted);font-style:italic;margin-top:14px}
 .demo-pic{position:relative;aspect-ratio:744/358;border-radius:14px;overflow:hidden;border:1px solid var(--ink);background:var(--sheet);box-shadow:0 18px 44px var(--glow)}
 .demo-pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.04);
   transition:opacity .45s ease,transform var(--d-bouncy) var(--spring-bouncy)}
@@ -299,7 +306,6 @@ footer a{color:var(--muted)}
     <a class="brand" href="#"><b>TRAPO</b><i>by Chunche Labs</i></a>
     <nav class="links" aria-label="Sections">
       <a href="#listen" data-i18n="n.listen">listen</a>
-      <a href="#thickness" data-i18n="n.knob">thickness</a>
       <a href="#fabrics" data-i18n="n.fabrics">fabrics</a>
       <a href="#presets" data-i18n="n.presets">presets</a>
       <a href="#depth" data-i18n="n.depth">in depth</a>
@@ -376,47 +382,13 @@ footer a{color:var(--muted)}
   </div>
 </section>
 
-<!-- ============ THE BIG KNOB ============ -->
-<section id="thickness">
-  <div class="wrap">
-    <h2 class="reveal" data-i18n="t.title">Turn the big knob</h2>
-    <p class="lede reveal" data-i18n="t.lede">Thickness is TRAPO's main control: from one thin layer of wool to six. Drag it while it plays.</p>
-    <div class="thick sheet reveal" data-thick>
-      <div class="knobbox">
-        <div class="label">thickness</div>
-        <svg class="bigknob" viewBox="0 0 230 230" role="slider" tabindex="0" aria-label="Thickness" aria-valuemin="0" aria-valuemax="100" aria-valuenow="40" data-i18n-aria="t.knob">
-          <path class="arc-bg" fill="none" stroke-width="13" stroke-linecap="round"/>
-          <path class="arc-val" fill="none" stroke-width="13" stroke-linecap="round"/>
-          <g class="cap"><circle cx="115" cy="119" r="74" class="cap-shadow"/><circle cx="115" cy="115" r="74" class="cap-face" stroke-width="2.5"/>
-          <line class="pointer" x1="115" y1="115" x2="115" y2="62" stroke-width="5" stroke-linecap="round"/></g>
-        </svg>
-        <div class="readout"><span data-tval>40 %</span> <small>·</small> <span data-tlayers>3.0 layers</span></div>
-        <div class="knob-hint" data-i18n="t.hint">drag up or down, scroll, or use the arrow keys</div>
-        <div class="demo-controls playarea">
-          <button class="play" type="button" aria-label="Play the thickness demo" data-i18n-aria="t.play"><svg class="i-play" viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 2.5v11l9-5.5z" fill="currentColor"/></svg><svg class="i-pause" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5h3v11H4zM9 2.5h3v11H9z" fill="currentColor"/></svg></button>
-          <button class="switch" type="button" role="switch" aria-checked="true"><span class="track"><span class="knob"></span></span><span class="lbl">TRAPO on</span></button>
-        </div>
-      </div>
-      <div>
-        <div class="demo-pic" role="img" aria-label="The wool cloth in TRAPO, thicker as the knob turns" data-i18n-aria="t.pic">
-          <img class="day-only" data-k="0" src="assets/img/thick-0-day.jpg" alt="" loading="lazy"><img class="day-only" data-k="1" src="assets/img/thick-1-day.jpg" alt="" loading="lazy"><img class="day-only" data-k="2" src="assets/img/thick-2-day.jpg" alt="" loading="lazy"><img class="day-only" data-k="3" src="assets/img/thick-3-day.jpg" alt="" loading="lazy"><img class="day-only" data-k="4" src="assets/img/thick-4-day.jpg" alt="" loading="lazy"><img class="day-only" data-k="5" src="assets/img/thick-5-day.jpg" alt="" loading="lazy">
-          <img class="night-only" data-k="0" src="assets/img/thick-0-night.jpg" alt="" loading="lazy"><img class="night-only" data-k="1" src="assets/img/thick-1-night.jpg" alt="" loading="lazy"><img class="night-only" data-k="2" src="assets/img/thick-2-night.jpg" alt="" loading="lazy"><img class="night-only" data-k="3" src="assets/img/thick-3-night.jpg" alt="" loading="lazy"><img class="night-only" data-k="4" src="assets/img/thick-4-night.jpg" alt="" loading="lazy"><img class="night-only" data-k="5" src="assets/img/thick-5-night.jpg" alt="" loading="lazy">
-        </div>
-        <div class="spec-wrap"><canvas class="spec" aria-hidden="true"></canvas><div class="spec-legend" aria-hidden="true"><span><i></i><span data-i18n="sp.fill">what you hear</span></span><span><i class="line"></i><span data-i18n="sp.line">the other one</span></span></div></div>
-        <p class="meta" data-i18n="t.meta">Wool, everything else as TRAPO starts. Each step of the knob here is a real render through TRAPO, from 1 to 6 layers; in between, the page blends the two nearest.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ PICK A FABRIC ============ -->
+<!-- ============ FABRIC x THICKNESS PLAYGROUND ============ -->
 <section id="fabrics">
   <div class="wrap">
-    <h2 class="reveal" data-i18n="f.title">Pick a fabric</h2>
-    <p class="lede reveal" data-i18n="f.lede">Five cloths, each with its own weave, feel and grain. Switch while it plays.</p>
-    <div class="demo sheet reveal" data-fabric-demo>
-      <div>
-        <div class="chips" role="radiogroup" aria-label="Fabric">
+    <h2 class="reveal" data-i18n="f.title">Pick a fabric, turn the knob</h2>
+    <p class="lede reveal" data-i18n="f.lede">The two big choices in TRAPO: which cloth, and how many layers of it. Try any mix while it plays.</p>
+    <div class="pg sheet reveal" data-playground>
+      <div class="chips" role="radiogroup" aria-label="Fabric">
           <span class="indicator" aria-hidden="true"></span>
           <button class="chip" type="button" role="radio" aria-checked="false" data-fabric="silk"><svg viewBox="0 0 34 34" aria-hidden="true"><rect width="34" height="34" fill="#e8b9b5"/><path d="M-4 30L30-4M4 38L38 4M-12 22L22-12M12 46L46 12" stroke="#fff" stroke-width="2.2" opacity=".75"/></svg>silk</button>
           <button class="chip" type="button" role="radio" aria-checked="false" data-fabric="cotton"><svg viewBox="0 0 34 34" aria-hidden="true"><rect width="34" height="34" fill="#ece6d6"/><path d="M0 7h34M0 14h34M0 21h34M0 28h34M7 0v34M14 0v34M21 0v34M28 0v34" stroke="#b9ad95" stroke-width="1"/></svg>cotton</button>
@@ -424,34 +396,35 @@ footer a{color:var(--muted)}
           <button class="chip" type="button" role="radio" aria-checked="false" data-fabric="felt"><svg viewBox="0 0 34 34" aria-hidden="true"><rect width="34" height="34" fill="#8f6f78"/><g fill="#d9c8cc"><circle cx="6" cy="8" r="1"/><circle cx="17" cy="5" r=".8"/><circle cx="27" cy="10" r="1.1"/><circle cx="11" cy="17" r=".9"/><circle cx="23" cy="20" r="1"/><circle cx="5" cy="26" r=".8"/><circle cx="15" cy="28" r="1.1"/><circle cx="29" cy="28" r=".9"/></g></svg>felt</button>
           <button class="chip" type="button" role="radio" aria-checked="false" data-fabric="denim"><svg viewBox="0 0 34 34" aria-hidden="true"><rect width="34" height="34" fill="#5b77a8"/><path d="M-4 8L8-4M-4 16L16-4M-4 24L24-4M-4 32L32-4M2 38L38 2M10 38L38 10M18 38L38 18M26 38L38 26" stroke="#2f4878" stroke-width="1.6"/></svg>denim</button>
         </div>
-        <div class="fabric-text swap" aria-live="polite">
-          <h3 data-fname>wool</h3>
-          <p data-fdesc>Warm and cosy, with hairy fuzz and a little bounce.</p>
+      <div class="pg-main">
+        <div class="knobbox">
+          <div class="label">thickness</div>
+          <svg class="bigknob" viewBox="0 0 230 230" role="slider" tabindex="0" aria-label="Thickness" aria-valuemin="0" aria-valuemax="100" aria-valuenow="40" data-i18n-aria="t.knob">
+            <path class="arc-bg" fill="none" stroke-width="13" stroke-linecap="round"/>
+            <path class="arc-val" fill="none" stroke-width="13" stroke-linecap="round"/>
+            <g class="cap"><circle cx="115" cy="119" r="74" class="cap-shadow"/><circle cx="115" cy="115" r="74" class="cap-face" stroke-width="2.5"/>
+            <line class="pointer" x1="115" y1="115" x2="115" y2="62" stroke-width="5" stroke-linecap="round"/></g>
+          </svg>
+          <div class="readout"><span data-tval>40 %</span> <small>·</small> <span data-tlayers>3.0 layers</span></div>
+          <div class="knob-hint" data-i18n="t.hint">drag up or down, scroll, or use the arrow keys</div>
         </div>
+        <div>
+          <div class="demo-pic" role="img" aria-label="The cloth in TRAPO, in the chosen fabric and thickness" data-i18n-aria="t.pic"><img class="day-only" data-k="0" alt=""><img class="day-only" data-k="1" alt=""><img class="day-only" data-k="2" alt=""><img class="day-only" data-k="3" alt=""><img class="day-only" data-k="4" alt=""><img class="day-only" data-k="5" alt=""><img class="night-only" data-k="0" alt=""><img class="night-only" data-k="1" alt=""><img class="night-only" data-k="2" alt=""><img class="night-only" data-k="3" alt=""><img class="night-only" data-k="4" alt=""><img class="night-only" data-k="5" alt=""></div>
+          <div class="fabric-text swap" aria-live="polite"><h3 data-fname>wool</h3><p data-fdesc>Warm and cosy, with hairy fuzz, a round low end and a little bounce.</p></div>
+        </div>
+      </div>
+      <div class="pg-foot">
         <div class="demo-controls playarea">
-          <button class="play" type="button" aria-label="Play the fabric demo"><svg class="i-play" viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 2.5v11l9-5.5z" fill="currentColor"/></svg><svg class="i-pause" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5h3v11H4zM9 2.5h3v11H9z" fill="currentColor"/></svg></button>
+          <button class="play" type="button" aria-label="Play the fabric demo" data-i18n-aria="t.play"><svg class="i-play" viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 2.5v11l9-5.5z" fill="currentColor"/></svg><svg class="i-pause" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5h3v11H4zM9 2.5h3v11H9z" fill="currentColor"/></svg></button>
           <button class="switch" type="button" role="switch" aria-checked="true"><span class="track"><span class="knob"></span></span><span class="lbl">TRAPO on</span></button>
           <div class="progress" aria-hidden="true" style="min-width:120px"><i></i></div>
         </div>
         <div class="spec-wrap"><canvas class="spec" aria-hidden="true"></canvas><div class="spec-legend" aria-hidden="true"><span><i></i><span data-i18n="sp.fill">what you hear</span></span><span><i class="line"></i><span data-i18n="sp.line">the other one</span></span></div></div>
-        <p class="meta" data-i18n="f.meta">The same beat through each fabric at 55 % thickness, everything else as TRAPO starts. Loudness stays steady, so you hear the colour, not the volume.</p>
       </div>
-      <div class="demo-pic" role="img" aria-label="The cloth in TRAPO, in the chosen fabric">
-        <img class="day-only" data-pic="silk" src="assets/img/fabric-silk-day.jpg" alt="">
-        <img class="day-only" data-pic="cotton" src="assets/img/fabric-cotton-day.jpg" alt="">
-        <img class="day-only on" data-pic="wool" src="assets/img/fabric-wool-day.jpg" alt="">
-        <img class="day-only" data-pic="felt" src="assets/img/fabric-felt-day.jpg" alt="">
-        <img class="day-only" data-pic="denim" src="assets/img/fabric-denim-day.jpg" alt="">
-        <img class="night-only" data-pic="silk" src="assets/img/fabric-silk-night.jpg" alt="">
-        <img class="night-only" data-pic="cotton" src="assets/img/fabric-cotton-night.jpg" alt="">
-        <img class="night-only on" data-pic="wool" src="assets/img/fabric-wool-night.jpg" alt="">
-        <img class="night-only" data-pic="felt" src="assets/img/fabric-felt-night.jpg" alt="">
-        <img class="night-only" data-pic="denim" src="assets/img/fabric-denim-night.jpg" alt="">
-      </div>
+      <p class="meta" data-i18n="f.meta">Every fabric at 1 to 6 layers is a real render of the same beat through TRAPO, everything else as it starts. Between the knob's steps, the page blends the two nearest.</p>
     </div>
   </div>
 </section>
-
 
 <!-- ============ PRESET TOUR ============ -->
 <section id="presets">
@@ -595,7 +568,7 @@ footer a{color:var(--muted)}
   const store = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} } };
   /* ---------- words: English is in the page itself; Spanish here ---------- */
   const ES = {
-    "n.listen": "escuchar", "n.knob": "thickness", "n.fabrics": "telas", "n.presets": "presets", "n.depth": "a fondo", "n.faq": "preguntas", "n.download": "descarga gratis",
+    "n.listen": "escuchar", "n.fabrics": "telas", "n.presets": "presets", "n.depth": "a fondo", "n.faq": "preguntas", "n.download": "descarga gratis",
     "h.kicker": "trapo (m.): pedazo de tela que sirve para todo.",
     "h.title": "Échale un trapo<br>a tu sonido.",
     "h.pitch": "Un efecto de audio que funciona como tela de verdad. Elige una tela, decide cuántas capas, y escucha tu batería, tus teclados o tu voz suavizarse, engrosarse y respirar, como cuando le tiras algo encima al parlante.",
@@ -608,12 +581,9 @@ footer a{color:var(--muted)}
     "l.note1": "Un loop boom-bap se vuelve suave, con aire de cuarto.", "l.note2": "Un piano eléctrico se vuelve cálido y cercano.",
     "l.note3": "Un bajo de sintetizador se redondea, con los agudos guardados.", "l.note4": "La fiesta del vecino.",
     "sp.fill": "lo que escuchas", "sp.line": "la otra versión",
-    "t.title": "Gira la perilla grande",
-    "t.lede": "Thickness es el control principal de TRAPO: de una capa fina de lana a seis. Arrástrala mientras suena.",
     "t.hint": "arrastra hacia arriba o abajo, usa la rueda o las flechas",
-    "t.meta": "Lana, todo lo demás como arranca TRAPO. Cada paso de la perilla aquí es un render real por TRAPO, de 1 a 6 capas; en medio, la página mezcla los dos más cercanos.",
-    "f.title": "Elige una tela", "f.lede": "Cinco telas, cada una con su tejido, su tacto y su grano. Cambia mientras suena.",
-    "f.meta": "El mismo beat por cada tela al 55 % de thickness, todo lo demás como arranca TRAPO. El volumen se mantiene, así que escuchas el color, no el volumen.",
+    "f.title": "Elige una tela y gira la perilla", "f.lede": "Las dos grandes decisiones en TRAPO: qué tela y cuántas capas. Prueba cualquier combinación mientras suena.",
+    "f.meta": "Cada tela de 1 a 6 capas es un render real del mismo beat por TRAPO, todo lo demás como arranca. Entre los pasos de la perilla, la página mezcla los dos más cercanos.",
     "p.title": "Prueba los presets", "p.lede": "Ocho de los 167, sobre el mismo beat. Toca uno mientras suena.",
     "p.meta": "Con el volumen igualado al original, para que escuches el carácter y no el volumen. En TRAPO, deja el mouse sobre cualquier preset para escucharlo en tu propia pista.",
     "x.title": "Qué hace",
@@ -655,7 +625,7 @@ footer a{color:var(--muted)}
   };
   const ES_ARIA = {
     "h.video": "La ventana de TRAPO: una tela de lana con ojos de fantasma sobre un parlante, con una pesa encima, respirando con el beat",
-    "h.play": "Reproducir el beat", "t.play": "Reproducir la demo de thickness", "t.knob": "Thickness", "t.pic": "La tela de lana en TRAPO, más gruesa a medida que giras la perilla", "p.play": "Reproducir los presets", "p.group": "Preset"
+    "h.play": "Reproducir el beat", "t.play": "Reproducir la demo de telas", "t.knob": "Thickness", "t.pic": "La tela en TRAPO, con la tela y el grosor elegidos", "p.play": "Reproducir los presets", "p.group": "Preset"
   };
   const WORDS = {
     en: { dl: k => `Download for ${k === "mac" ? "Mac" : "Windows"}`, ver: v => `Free · version ${v}`, flip: "turn the card over", flipBack: "turn it back",
@@ -838,7 +808,22 @@ footer a{color:var(--muted)}
     if (!ctx) { ctx = new (window.AudioContext || window.webkitAudioContext)(); sink = ctx.createGain(); sink.gain.value = 0; sink.connect(ctx.destination); }
     return ctx;
   };
-  const load = name => cache[name] || (cache[name] = fetch(`assets/audio/${name}.mp3`).then(r => r.arrayBuffer()).then(b => new Promise((ok, no) => audioCtx().decodeAudioData(b, ok, no))));
+  const cacheOrder = [];
+  const load = name => {
+    if (cache[name]) { cacheOrder.splice(cacheOrder.indexOf(name), 1); cacheOrder.push(name); return cache[name]; }
+    cache[name] = fetch(`assets/audio/${name}.mp3`).then(r => { if (!r.ok) throw new Error(name); return r.arrayBuffer(); })
+      .then(b => new Promise((ok, no) => audioCtx().decodeAudioData(b, ok, no)))
+      .catch(e => { delete cache[name]; cacheOrder.splice(cacheOrder.indexOf(name), 1); throw e; });
+    cacheOrder.push(name);
+    // decoded audio is big: keep about 24 loops, never the ones playing now
+    const busy = new Set(active ? active.names : []);
+    for (let i = 0; cacheOrder.length > 24 && i < cacheOrder.length; ) {
+      const n = cacheOrder[i];
+      if (busy.has(n) || n === name) { i++; continue; }
+      delete cache[n]; cacheOrder.splice(i, 1);
+    }
+    return cache[name];
+  };
 
   /* the spectrum: what you hear filled, the other version as a dashed line, 40 Hz to 18 kHz */
   const BANDS = 80, FLO = 40, FHI = 18000;
@@ -928,6 +913,29 @@ footer a{color:var(--muted)}
       const t = audioCtx().currentTime;
       Object.entries(this.nodes.gains).forEach(([n, g]) => { g.gain.cancelScheduledValues(t); g.gain.setTargetAtTime(gains[n] || 0, t, tc); });
     }
+    async rebase(names, gains) {                  // swap to another set of loops without losing the beat
+      this.names = names; this.gainsWanted = gains;
+      if (!this.nodes) return;
+      const token = this.rebaseToken = (this.rebaseToken || 0) + 1;
+      let bufs; try { bufs = await Promise.all(names.map(load)); } catch (e) { return; }
+      if (!this.nodes || token !== this.rebaseToken) return;
+      const c = audioCtx(), t = c.currentTime + 0.03, nodes = this.nodes;
+      const pos = t - nodes.t0, p = pos < LOOP_END ? Math.max(0, pos) : LOOP_START + ((pos - LOOP_START) % CYCLE);
+      Object.keys(nodes.srcs).forEach(n => {
+        if (names.includes(n)) return;
+        nodes.gains[n].gain.cancelScheduledValues(t); nodes.gains[n].gain.setTargetAtTime(0, t, 0.015); nodes.srcs[n].stop(t + 0.15);
+        delete nodes.srcs[n]; delete nodes.gains[n]; delete nodes.ans[n];
+      });
+      const want = this.gainsWanted || {};
+      names.forEach((n, i) => {
+        if (nodes.srcs[n]) { nodes.gains[n].gain.cancelScheduledValues(t); nodes.gains[n].gain.setTargetAtTime(want[n] || 0, t, 0.015); return; }
+        const s = c.createBufferSource(); s.buffer = bufs[i]; s.loop = true; s.loopStart = LOOP_START; s.loopEnd = Math.min(LOOP_END, bufs[i].duration);
+        const g = c.createGain(); g.gain.value = 0; g.gain.setTargetAtTime(want[n] || 0, t, 0.015);
+        const an = c.createAnalyser(); an.fftSize = 4096; an.smoothingTimeConstant = 0.8; an.minDecibels = -110; an.maxDecibels = -10;
+        s.connect(g).connect(nodes.master); s.connect(an).connect(sink); s.start(t, Math.min(p, bufs[i].duration - 0.01));
+        nodes.srcs[n] = s; nodes.gains[n] = g; nodes.ans[n] = an;
+      });
+    }
     stop() {
       if (!this.nodes) return;
       const c = audioCtx(), t = c.currentTime, nodes = this.nodes;
@@ -947,7 +955,7 @@ footer a{color:var(--muted)}
       const p = pos < LOOP_END ? Math.max(0, pos) : LOOP_START + ((pos - LOOP_START) % CYCLE);   // position in the file
       const inCycle = p % CYCLE;
       if (this.prog) this.prog.style.transform = `scaleX(${(inCycle / CYCLE).toFixed(4)})`;
-      if (this.canvas) {
+      if (this.canvas && this.nodes.ans[this.sel]) {   // (during a fabric swap the new loops may not be there yet)
         const o = this.other(this.sel);
         drawSpectrum(this.canvas, spectrum(this.nodes.ans[this.sel]), o && this.nodes.ans[o] ? spectrum(this.nodes.ans[o]) : null);
       }
@@ -987,69 +995,50 @@ footer a{color:var(--muted)}
     wireSwitch($(".switch", card), on => lp.select(on ? wet : dry));
   });
 
-  /* pick a fabric */
-  const demo = $("[data-fabric-demo]");
-  let fabric = "wool";
-  const showFabricText = () => { $("[data-fname]", demo).textContent = fabric; $("[data-fdesc]", demo).textContent = FAB[lang][fabric]; };
-  if (demo) {
-    const names = ["fabric-silk", "fabric-cotton", "fabric-wool", "fabric-felt", "fabric-denim", "beat-dry"];
-    let on = true;
-    const lp = new Looper($(".playarea", demo), names, { canvas: $("canvas.spec", demo), other: sel => sel === "beat-dry" ? `fabric-${fabric}` : "beat-dry" });
-    const apply = () => lp.select(on ? `fabric-${fabric}` : "beat-dry");
-    lp.sel = "fabric-wool";
-    $(".play", demo).addEventListener("click", () => lp.toggle());
-    wireSwitch($(".switch", demo), v => { on = v; apply(); });
-    const chips = $$(".chip", demo), ind = $(".chips .indicator", demo), text = $(".fabric-text", demo);
-    const moveIndicator = () => { const c = chips.find(x => x.getAttribute("aria-checked") === "true"); ind.style.width = c.offsetWidth + "px"; ind.style.transform = `translateX(${c.offsetLeft}px)`; };
-    const choose = (chip, focus) => {
-      chips.forEach(c => { c.setAttribute("aria-checked", c === chip); c.tabIndex = c === chip ? 0 : -1; });
-      if (focus) chip.focus();
-      fabric = chip.dataset.fabric; apply(); moveIndicator();
-      $$(".demo-pic img", demo).forEach(im => im.classList.toggle("on", im.dataset.pic === fabric));
-      text.classList.add("out");
-      setTimeout(() => { showFabricText(); text.classList.remove("out"); }, 160);
+  /* pick a fabric, turn the knob: five cloths x six layers, all real renders */
+  const pgEl = $("[data-playground]");
+  let renderKnob = () => {}, showFabricText = () => {};
+  if (pgEl) {
+    let fabric = "wool", value = 40, on = true;
+    const stepNames = f => [0, 1, 2, 3, 4, 5].map(k => `pg-${f}-${k}`);
+    const lp = new Looper($(".pg-foot", pgEl), stepNames(fabric).concat("beat-dry"), {
+      canvas: $("canvas.spec", pgEl), other: sel => sel === "beat-dry" ? `pg-${fabric}-${Math.round(value / 20)}` : "beat-dry" });
+    const pic = $(".demo-pic", pgEl), imgs = $$(".demo-pic img", pgEl);
+    const gainsNow = () => {
+      const p = value / 20, i = Math.min(4, Math.floor(p)), f = p - i, g = {};
+      if (on) { g[`pg-${fabric}-${i}`] = Math.cos(f * Math.PI / 2); g[`pg-${fabric}-${i + 1}`] = Math.sin(f * Math.PI / 2); } else g["beat-dry"] = 1;
+      return g;
     };
-    chips.forEach((c, i) => {
-      c.tabIndex = c.getAttribute("aria-checked") === "true" ? 0 : -1;
-      c.addEventListener("click", () => choose(c));
-      c.addEventListener("keydown", e => {
-        const k = e.key === "ArrowRight" || e.key === "ArrowDown" ? 1 : e.key === "ArrowLeft" || e.key === "ArrowUp" ? -1 : 0;
-        if (k) { e.preventDefault(); choose(chips[(i + k + chips.length) % chips.length], true); }
+    const blendPics = () => {
+      const p = value / 20, i = Math.min(4, Math.floor(p)), f = p - i;
+      imgs.forEach(im => { const k = +im.dataset.k; im.style.opacity = k === i ? 1 : k === i + 1 ? f : 0; im.style.zIndex = k === i ? 1 : 2; });
+    };
+    const setPics = (f, fade) => {
+      const assign = () => imgs.forEach(im => { im.src = `assets/img/pg-${f}-${im.dataset.k}-${im.classList.contains("night-only") ? "night" : "day"}.jpg`; });
+      if (!fade) { assign(); blendPics(); return; }
+      const look = document.documentElement.dataset.theme === "night" ? "night" : "day";
+      const ready = [0, 1, 2, 3, 4, 5].map(k => new Promise(ok => { const im = new Image(); im.onload = im.onerror = ok; im.src = `assets/img/pg-${f}-${k}-${look}.jpg`; }));
+      pic.classList.add("fading");
+      Promise.all([Promise.all(ready), new Promise(ok => setTimeout(ok, 140))]).then(() => {
+        if (f !== fabric) return;
+        assign(); blendPics(); requestAnimationFrame(() => pic.classList.remove("fading"));
       });
-    });
-    addEventListener("resize", moveIndicator); requestAnimationFrame(moveIndicator);
-    if (document.fonts) document.fonts.ready.then(moveIndicator);
-    $(".playarea", demo).classList.add("demo-play");
-  }
+    };
+    const apply = () => { lp.sel = on ? `pg-${fabric}-${Math.round(value / 20)}` : "beat-dry"; lp.mixTo(gainsNow()); blendPics(); };
 
-  /* the big knob */
-  const thick = $("[data-thick]");
-  let renderKnob = () => {};
-  if (thick) {
-    const names = [0, 1, 2, 3, 4, 5].map(k => `thick-${k}`).concat("beat-dry");
-    let value = 40, on = true;
-    const lp = new Looper($(".playarea", thick), names, { canvas: $("canvas.spec", thick), other: sel => sel === "beat-dry" ? `thick-${Math.round(value / 20)}` : "beat-dry" });
-    const knob = $(".bigknob", thick), A0 = -135, A1 = 135, R = 98, C = 115;
+    // the knob
+    const knob = $(".bigknob", pgEl), A0 = -135, A1 = 135, R = 98, C = 115;
     const pt = a => { const r = (a - 90) * Math.PI / 180; return [C + R * Math.cos(r), C + R * Math.sin(r)]; };
     const arc = (a0, a1) => { const [x0, y0] = pt(a0), [x1, y1] = pt(a1); return `M${x0.toFixed(2)} ${y0.toFixed(2)}A${R} ${R} 0 ${a1 - a0 > 180 ? 1 : 0} 1 ${x1.toFixed(2)} ${y1.toFixed(2)}`; };
     $(".arc-bg", knob).setAttribute("d", arc(A0, A1));
-    const imgs = $$(".demo-pic img", thick);
-    const apply = () => {
-      const p = value / 20, i = Math.min(4, Math.floor(p)), f = p - i, gains = {};
-      if (on) { gains[`thick-${i}`] = Math.cos(f * Math.PI / 2); gains[`thick-${i + 1}`] = Math.sin(f * Math.PI / 2); }
-      else gains["beat-dry"] = 1;
-      lp.sel = on ? `thick-${Math.round(p)}` : "beat-dry";
-      lp.mixTo(gains);
-      imgs.forEach(im => { const k = +im.dataset.k; im.style.opacity = k === i ? 1 : k === i + 1 ? f : 0; im.style.zIndex = k === i ? 1 : 2; });
-    };
     renderKnob = () => {
       const a = A0 + (A1 - A0) * value / 100;
       $(".arc-val", knob).setAttribute("d", value > 0.5 ? arc(A0, a) : "M0 0");
       $(".pointer", knob).setAttribute("transform", `rotate(${a.toFixed(2)} ${C} ${C})`);
       knob.setAttribute("aria-valuenow", Math.round(value));
       knob.setAttribute("aria-valuetext", `${Math.round(value)} %, ${W().layers(1 + value / 20)}`);
-      $("[data-tval]", thick).textContent = `${Math.round(value)} %`;
-      $("[data-tlayers]", thick).textContent = W().layers(1 + value / 20);
+      $("[data-tval]", pgEl).textContent = `${Math.round(value)} %`;
+      $("[data-tlayers]", pgEl).textContent = W().layers(1 + value / 20);
     };
     const set = v => { value = Math.max(0, Math.min(100, v)); renderKnob(); apply(); };
     let drag = null;
@@ -1064,9 +1053,36 @@ footer a{color:var(--muted)}
       if (k === "Home") { e.preventDefault(); set(0); } else if (k === "End") { e.preventDefault(); set(100); } else if (d !== null) { e.preventDefault(); set(value + d); }
     });
     knob.addEventListener("dblclick", () => set(40));
-    $(".play", thick).addEventListener("click", () => lp.toggle());
-    wireSwitch($(".switch", thick), v => { on = v; apply(); });
-    set(40);
+
+    // the fabrics
+    const chips = $$(".chip", pgEl), ind = $(".chips .indicator", pgEl), text = $(".fabric-text", pgEl);
+    showFabricText = () => { $("[data-fname]", pgEl).textContent = fabric; $("[data-fdesc]", pgEl).textContent = FAB[lang][fabric]; };
+    const moveIndicator = () => { const c = chips.find(x => x.getAttribute("aria-checked") === "true"); ind.style.width = c.offsetWidth + "px"; ind.style.transform = `translateX(${c.offsetLeft}px)`; };
+    const choose = (chip, focus) => {
+      chips.forEach(c => { c.setAttribute("aria-checked", c === chip); c.tabIndex = c === chip ? 0 : -1; });
+      if (focus) chip.focus();
+      if (chip.dataset.fabric === fabric) return;
+      fabric = chip.dataset.fabric; moveIndicator();
+      lp.rebase(stepNames(fabric).concat("beat-dry"), gainsNow());
+      lp.sel = on ? `pg-${fabric}-${Math.round(value / 20)}` : "beat-dry";
+      setPics(fabric, true);
+      text.classList.add("out");
+      setTimeout(() => { showFabricText(); text.classList.remove("out"); }, 160);
+    };
+    chips.forEach((c, i) => {
+      c.tabIndex = c.getAttribute("aria-checked") === "true" ? 0 : -1;
+      c.addEventListener("click", () => choose(c));
+      c.addEventListener("keydown", e => {
+        const k = e.key === "ArrowRight" || e.key === "ArrowDown" ? 1 : e.key === "ArrowLeft" || e.key === "ArrowUp" ? -1 : 0;
+        if (k) { e.preventDefault(); choose(chips[(i + k + chips.length) % chips.length], true); }
+      });
+    });
+    addEventListener("resize", moveIndicator); requestAnimationFrame(moveIndicator);
+    if (document.fonts) document.fonts.ready.then(moveIndicator);
+
+    $(".play", pgEl).addEventListener("click", () => lp.toggle());
+    wireSwitch($(".switch", pgEl), v => { on = v; apply(); });
+    setPics(fabric, false); set(40);
   }
 
   /* preset tour */
@@ -1110,7 +1126,7 @@ footer a{color:var(--muted)}
     const selId = sel ? sel.getAttribute("aria-controls") : "p-input";
     panels.innerHTML = "";
     Object.entries(STAGES).forEach(([key, s]) => {
-      const img = (side, look) => `<img class="${look}-only" src="assets/img/card-${key}-${side}-${look}.jpg" width="290" height="334" alt="${esc(W().card(key, side))}" loading="lazy">`;
+      const img = (side, look) => `<img class="${look}-only" src="assets/img/card-${key}-${side}-${look}.webp" width="710" height="820" alt="${esc(W().card(key, side))}" loading="lazy">`;
       panels.insertAdjacentHTML("beforeend", `
         <div class="panel" id="p-${key}" role="tabpanel" aria-labelledby="t-${key}" ${"p-" + key !== selId ? "hidden" : ""}>
           <div>
@@ -1171,7 +1187,7 @@ footer a{color:var(--muted)}
     $$("[data-join]").forEach(a => a.href = W().join);
     $$(".play").forEach(b => { if (!b.closest(".playing")) b.setAttribute("aria-label", b.dataset.i18nAria ? b.getAttribute("aria-label") : W().play); });
     renderDownloads(); renderVersion(); buildPanels(); renderTour(); renderKnob();
-    if (demo) showFabricText();
+    showFabricText();
     requestAnimationFrame(moveTab);
     if (save) store.set("trapo-lang", lang);
   };
