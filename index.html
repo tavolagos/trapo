@@ -123,6 +123,13 @@ nav.links a{text-decoration:none}
 .readout small{color:var(--muted);font-size:18px;font-style:italic}
 .knob-hint{color:var(--muted);font-style:italic;font-size:16px;margin-top:4px}
 .pg .demo-controls{justify-content:center}
+.pressbox{margin-top:22px}
+.knobbox .label.small{font-size:21px;margin-bottom:6px}
+.seg{display:inline-flex;border:1.5px solid var(--ink);border-radius:999px;background:var(--paper);box-shadow:0 3px 0 var(--shadow);overflow:hidden}
+.seg button{appearance:none;font:inherit;font-size:18px;cursor:pointer;border:0;background:none;color:var(--ink);padding:7px 16px;transition:background-color .3s ease,color .3s ease}
+.seg button+button{border-left:1px solid var(--hairline)}
+.seg button[aria-checked="true"]{background:var(--ink);color:var(--paper)}
+.seg button:focus-visible{outline:2px dashed var(--ink);outline-offset:-5px}
 .pg .demo-pic .lift{position:absolute;inset:0;z-index:5;opacity:0;background-repeat:no-repeat;background-size:100% 800%;background-position:0 0;pointer-events:none}
 @media (min-width:861px){ .pg .chip{flex-direction:row;justify-content:center;gap:12px;padding:12px 10px;font-size:20px} .pg .chip svg{width:30px;height:30px} }
 .bigknob .arc-bg{stroke:var(--track)} .bigknob .arc-val{stroke:var(--accent)}
@@ -387,7 +394,7 @@ footer a{color:var(--muted)}
 <section id="fabrics">
   <div class="wrap">
     <h2 class="reveal" data-i18n="f.title">Pick a fabric, turn the knob</h2>
-    <p class="lede reveal" data-i18n="f.lede">The two big choices in TRAPO: which cloth, and how many layers of it. Try any mix while it plays.</p>
+    <p class="lede reveal" data-i18n="f.lede">The big choices in TRAPO: which cloth, how many layers of it, and how hard the weight presses. Try any mix while it plays.</p>
     <div class="pg sheet reveal" data-playground>
       <div class="chips" role="radiogroup" aria-label="Fabric">
           <span class="indicator" aria-hidden="true"></span>
@@ -408,6 +415,11 @@ footer a{color:var(--muted)}
           </svg>
           <div class="readout"><span data-tval>40 %</span> <small>·</small> <span data-tlayers>3.0 layers</span></div>
           <div class="knob-hint" data-i18n="t.hint">drag up or down, scroll, or use the arrow keys</div>
+          <div class="pressbox">
+            <div class="label small">press</div>
+            <div class="seg" role="radiogroup" aria-label="Press" data-i18n-aria="t.press"><button type="button" role="radio" aria-checked="true" tabindex="0" data-press="0" data-i18n="t.p0">off</button><button type="button" role="radio" aria-checked="false" tabindex="-1" data-press="1" data-i18n="t.p1">light</button><button type="button" role="radio" aria-checked="false" tabindex="-1" data-press="2" data-i18n="t.p2">heavy</button></div>
+            <div class="knob-hint" data-i18n="t.phint">the compressor: a weight on the cloth</div>
+          </div>
         </div>
         <div>
           <div class="demo-pic" role="img" aria-label="The cloth in TRAPO, in the chosen fabric and thickness" data-i18n-aria="t.pic"><img class="day-only" data-k="0" alt=""><img class="day-only" data-k="1" alt=""><img class="day-only" data-k="2" alt=""><img class="day-only" data-k="3" alt=""><img class="day-only" data-k="4" alt=""><img class="day-only" data-k="5" alt=""><img class="night-only" data-k="0" alt=""><img class="night-only" data-k="1" alt=""><img class="night-only" data-k="2" alt=""><img class="night-only" data-k="3" alt=""><img class="night-only" data-k="4" alt=""><img class="night-only" data-k="5" alt=""><div class="lift" aria-hidden="true"></div></div>
@@ -422,7 +434,7 @@ footer a{color:var(--muted)}
         </div>
         <div class="spec-wrap"><canvas class="spec" aria-hidden="true"></canvas><div class="spec-legend" aria-hidden="true"><span><i></i><span data-i18n="sp.fill">what you hear</span></span><span><i class="line"></i><span data-i18n="sp.line">the other one</span></span></div></div>
       </div>
-      <p class="meta" data-i18n="f.meta">Every fabric at 1 to 6 layers is a real render of the same beat through TRAPO, everything else as it starts. Between the knob's steps, the page blends the two nearest.</p>
+      <p class="meta" data-i18n="f.meta">Every fabric at 1 to 6 layers, with Press off, light (35 %) or heavy (75 %), is a real render of the same beat through TRAPO, everything else as it starts. Between the knob's steps, the page blends the two nearest.</p>
     </div>
   </div>
 </section>
@@ -582,9 +594,10 @@ footer a{color:var(--muted)}
     "l.note1": "Un loop boom-bap se vuelve suave, con aire de cuarto.", "l.note2": "Un piano eléctrico se vuelve cálido y cercano.",
     "l.note3": "Un bajo de sintetizador se redondea, con los agudos guardados.", "l.note4": "La fiesta del vecino.",
     "sp.fill": "lo que escuchas", "sp.line": "la otra versión",
+    "t.p0": "apagado", "t.p1": "ligero", "t.p2": "fuerte", "t.phint": "el compresor: una pesa sobre la tela",
     "t.hint": "arrastra hacia arriba o abajo, usa la rueda o las flechas",
-    "f.title": "Elige una tela y gira la perilla", "f.lede": "Las dos grandes decisiones en TRAPO: qué tela y cuántas capas. Prueba cualquier combinación mientras suena.",
-    "f.meta": "Cada tela de 1 a 6 capas es un render real del mismo beat por TRAPO, todo lo demás como arranca. Entre los pasos de la perilla, la página mezcla los dos más cercanos.",
+    "f.title": "Elige una tela y gira la perilla", "f.lede": "Las grandes decisiones en TRAPO: qué tela, cuántas capas y qué tan fuerte presiona la pesa. Prueba cualquier combinación mientras suena.",
+    "f.meta": "Cada tela de 1 a 6 capas, con Press apagado, ligero (35 %) o fuerte (75 %), es un render real del mismo beat por TRAPO, todo lo demás como arranca. Entre los pasos de la perilla, la página mezcla los dos más cercanos.",
     "p.title": "Prueba los presets", "p.lede": "Ocho de los 167, sobre el mismo beat. Toca uno mientras suena.",
     "p.meta": "Con el volumen igualado al original, para que escuches el carácter y no el volumen. En TRAPO, deja el mouse sobre cualquier preset para escucharlo en tu propia pista.",
     "x.title": "Qué hace",
@@ -626,7 +639,7 @@ footer a{color:var(--muted)}
   };
   const ES_ARIA = {
     "h.video": "La ventana de TRAPO: una tela de lana con ojos de fantasma sobre un parlante, con una pesa encima, respirando con el beat",
-    "h.play": "Reproducir el beat", "t.play": "Reproducir la demo de telas", "t.knob": "Thickness", "t.pic": "La tela en TRAPO, con la tela y el grosor elegidos", "p.play": "Reproducir los presets", "p.group": "Preset"
+    "h.play": "Reproducir el beat", "t.play": "Reproducir la demo de telas", "t.knob": "Thickness", "t.press": "Press", "t.pic": "La tela en TRAPO, con la tela y el grosor elegidos", "p.play": "Reproducir los presets", "p.group": "Preset"
   };
   const WORDS = {
     en: { dl: k => `Download for ${k === "mac" ? "Mac" : "Windows"}`, ver: v => `Free · version ${v}`, flip: "turn the card over", flipBack: "turn it back",
@@ -1000,14 +1013,16 @@ footer a{color:var(--muted)}
   const pgEl = $("[data-playground]");
   let renderKnob = () => {}, showFabricText = () => {};
   if (pgEl) {
-    let fabric = "wool", value = 40, on = true;
-    const stepNames = f => [0, 1, 2, 3, 4, 5].map(k => `pg-${f}-${k}`);
+    let fabric = "wool", value = 40, on = true, press = 0;
+    const suf = () => press ? `-p${press}` : "";                 // press off, light, heavy
+    const step = k => `pg-${fabric}-${k}${suf()}`;
+    const stepNames = f => [0, 1, 2, 3, 4, 5].map(k => `pg-${f}-${k}${suf()}`);
     const lp = new Looper($(".pg-foot", pgEl), stepNames(fabric).concat("beat-dry"), {
-      canvas: $("canvas.spec", pgEl), other: sel => sel === "beat-dry" ? `pg-${fabric}-${Math.round(value / 20)}` : "beat-dry" });
+      canvas: $("canvas.spec", pgEl), other: sel => sel === "beat-dry" ? step(Math.round(value / 20)) : "beat-dry" });
     const pic = $(".demo-pic", pgEl), imgs = $$(".demo-pic img", pgEl);
     const gainsNow = () => {
       const p = value / 20, i = Math.min(4, Math.floor(p)), f = p - i, g = {};
-      if (on) { g[`pg-${fabric}-${i}`] = Math.cos(f * Math.PI / 2); g[`pg-${fabric}-${i + 1}`] = Math.sin(f * Math.PI / 2); } else g["beat-dry"] = 1;
+      if (on) { g[step(i)] = Math.cos(f * Math.PI / 2); g[step(i + 1)] = Math.sin(f * Math.PI / 2); } else g["beat-dry"] = 1;
       return g;
     };
     const blendPics = () => {
@@ -1015,20 +1030,21 @@ footer a{color:var(--muted)}
       imgs.forEach(im => { const k = +im.dataset.k; im.style.opacity = k === i ? 1 : k === i + 1 ? f : 0; im.style.zIndex = k === i ? 1 : 2; });
     };
     const setPics = (f, fade) => {
-      const assign = () => imgs.forEach(im => { im.src = `assets/img/pg-${f}-${im.dataset.k}-${im.classList.contains("night-only") ? "night" : "day"}.jpg`; });
+      const assign = () => imgs.forEach(im => { im.src = `assets/img/pg-${f}-${im.dataset.k}${suf()}-${im.classList.contains("night-only") ? "night" : "day"}.jpg`; });
       if (!fade) { assign(); blendPics(); return; }
       const look = document.documentElement.dataset.theme === "night" ? "night" : "day";
-      const ready = [0, 1, 2, 3, 4, 5].map(k => new Promise(ok => { const im = new Image(); im.onload = im.onerror = ok; im.src = `assets/img/pg-${f}-${k}-${look}.jpg`; }));
+      const ready = [0, 1, 2, 3, 4, 5].map(k => new Promise(ok => { const im = new Image(); im.onload = im.onerror = ok; im.src = `assets/img/pg-${f}-${k}${suf()}-${look}.jpg`; }));
+      const key = `${f}${suf()}`;
       pic.classList.add("fading");
       Promise.all([Promise.all(ready), new Promise(ok => setTimeout(ok, 140))]).then(() => {
-        if (f !== fabric) return;
+        if (f !== fabric || key !== `${fabric}${suf()}`) return;
         assign(); blendPics(); requestAnimationFrame(() => pic.classList.remove("fading"));
       });
     };
     // TRAPO off: the cloth lifts off the speaker, as in the plugin (8 rendered frames per fabric and thickness)
     const liftEl = $(".lift", pgEl);
     const look = () => document.documentElement.dataset.theme === "night" ? "night" : "day";
-    const liftUrl = () => `assets/img/lift-${fabric}-${Math.round(value / 20)}-${look()}.webp`;
+    const liftUrl = () => `assets/img/lift-${fabric}-${Math.round(value / 20)}${suf()}-${look()}.webp`;
     let liftRun = 0, lifted = false;
     const frame = f => { liftEl.style.backgroundPosition = `0 ${(f / 7 * 100).toFixed(3)}%`; };
     const withSprite = (url, then) => { const im = new Image(); im.onload = im.onerror = then; im.src = url; };
@@ -1056,7 +1072,7 @@ footer a{color:var(--muted)}
       withSprite(url, () => { if (id !== liftRun) return; liftEl.style.backgroundImage = `url("${url}")`; frame(7); liftEl.style.opacity = 1; });
     };
     new MutationObserver(refreshLift).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
-    const apply = () => { lp.sel = on ? `pg-${fabric}-${Math.round(value / 20)}` : "beat-dry"; lp.mixTo(gainsNow()); blendPics(); refreshLift(); };
+    const apply = () => { lp.sel = on ? step(Math.round(value / 20)) : "beat-dry"; lp.mixTo(gainsNow()); blendPics(); refreshLift(); };
 
     // the knob
     const knob = $(".bigknob", pgEl), A0 = -135, A1 = 135, R = 98, C = 115;
@@ -1096,7 +1112,7 @@ footer a{color:var(--muted)}
       if (chip.dataset.fabric === fabric) return;
       fabric = chip.dataset.fabric; moveIndicator();
       lp.rebase(stepNames(fabric).concat("beat-dry"), gainsNow());
-      lp.sel = on ? `pg-${fabric}-${Math.round(value / 20)}` : "beat-dry";
+      lp.sel = on ? step(Math.round(value / 20)) : "beat-dry";
       setPics(fabric, true); refreshLift();
       text.classList.add("out");
       setTimeout(() => { showFabricText(); text.classList.remove("out"); }, 160);
@@ -1112,8 +1128,27 @@ footer a{color:var(--muted)}
     addEventListener("resize", moveIndicator); requestAnimationFrame(moveIndicator);
     if (document.fonts) document.fonts.ready.then(moveIndicator);
 
+    // Press: off, light or heavy (each a real render with the weight on the cloth)
+    const segs = $$(".seg button", pgEl);
+    const choosePress = (b, focus) => {
+      segs.forEach(x => { x.setAttribute("aria-checked", x === b); x.tabIndex = x === b ? 0 : -1; });
+      if (focus) b.focus();
+      const p = +b.dataset.press; if (p === press) return;
+      press = p;
+      lp.rebase(stepNames(fabric).concat("beat-dry"), gainsNow());
+      lp.sel = on ? step(Math.round(value / 20)) : "beat-dry";
+      setPics(fabric, true); refreshLift();
+    };
+    segs.forEach((b, i) => {
+      b.addEventListener("click", () => choosePress(b));
+      b.addEventListener("keydown", e => {
+        const k = e.key === "ArrowRight" || e.key === "ArrowDown" ? 1 : e.key === "ArrowLeft" || e.key === "ArrowUp" ? -1 : 0;
+        if (k) { e.preventDefault(); choosePress(segs[(i + k + segs.length) % segs.length], true); }
+      });
+    });
+
     $(".play", pgEl).addEventListener("click", () => lp.toggle());
-    wireSwitch($(".switch", pgEl), v => { on = v; animateLift(!v); lp.sel = on ? `pg-${fabric}-${Math.round(value / 20)}` : "beat-dry"; lp.mixTo(gainsNow()); });
+    wireSwitch($(".switch", pgEl), v => { on = v; animateLift(!v); lp.sel = on ? step(Math.round(value / 20)) : "beat-dry"; lp.mixTo(gainsNow()); });
     setPics(fabric, false); set(40);
   }
 
