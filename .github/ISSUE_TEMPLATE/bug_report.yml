@@ -1,0 +1,52 @@
+name: Report a problem
+description: Something in TRAPO doesn't work, sounds wrong or crashes.
+title: "[bug] "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping make TRAPO better. The quickest way is the **report a problem** button
+        in TRAPO's **?** sheet: it fills in your version, computer and DAW for you.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      placeholder: "When I load the 'Felt Piano' preset in Ableton, the sound cuts out for a second."
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: How can I make it happen?
+      placeholder: "1. ...  2. ...  3. ..."
+  - type: input
+    id: version
+    attributes:
+      label: TRAPO version
+      description: Shown next to the TRAPO name in the plugin.
+      placeholder: "0.5.0"
+    validations:
+      required: true
+  - type: input
+    id: daw
+    attributes:
+      label: DAW and version
+      placeholder: "Ableton Live 12.1, Logic Pro 11..."
+    validations:
+      required: true
+  - type: dropdown
+    id: format
+    attributes:
+      label: Plug-in format
+      options: [VST3, AU, CLAP, Standalone app, Not sure]
+  - type: input
+    id: computer
+    attributes:
+      label: Computer
+      placeholder: "MacBook Air M2, macOS 15.1 / Windows 11"
+  - type: textarea
+    id: extra
+    attributes:
+      label: Anything else?
+      description: A screenshot, a short recording or the project file helps a lot.

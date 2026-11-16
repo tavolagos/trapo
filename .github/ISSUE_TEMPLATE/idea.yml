@@ -1,0 +1,16 @@
+name: Idea or wish
+description: Something you'd love TRAPO to do.
+title: "[idea] "
+labels: [idea]
+body:
+  - type: textarea
+    id: idea
+    attributes:
+      label: What would you like?
+      placeholder: "A 'silk scarf' fabric that only touches the highs..."
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: What would you use it for?
