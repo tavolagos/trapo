@@ -89,11 +89,11 @@ nav.links a{text-decoration:none}
 .stage{perspective:1600px;margin:56px auto 0;max-width:1080px}
 .stage .screen{transform-origin:50% 100%;will-change:transform}
 .stage video,.stage .screen img{display:block;width:100%;height:auto;aspect-ratio:1260/1062;border-radius:16px;border:1px solid var(--ink);box-shadow:0 26px 70px var(--glow);background:var(--sheet)}
-.hero-play{position:relative;z-index:2;display:inline-flex;align-items:center;gap:16px;flex-wrap:wrap;justify-content:center;margin:-34px auto 0;padding:12px 20px 12px 12px;border-radius:999px;text-align:left}
+.hero-play{position:relative;z-index:2;display:inline-flex;align-items:center;gap:16px;flex-wrap:wrap;justify-content:center;margin:26px auto 0;padding:12px 20px 12px 12px;border-radius:999px;text-align:left}
 .hero-play .what{font-size:16.5px;color:var(--muted);font-style:italic;line-height:1.25;max-width:15em}
 .hero-play .what b{color:var(--ink);font-weight:600;font-style:normal}
 .hero-play .spec{width:150px;height:40px}
-@media (max-width:640px){ .hero-play{border-radius:22px;margin-top:-16px;padding:12px 16px;gap:12px} .hero-play .spec{display:none} .hero-play .what{max-width:none;text-align:center} }
+@media (max-width:640px){ .hero-play{border-radius:22px;margin-top:18px;padding:12px 16px;gap:12px} .hero-play .spec{display:none} .hero-play .what{max-width:none;text-align:center} }
 
 /* ---- spectrum (what you hear, filled; the other version as a line) ---- */
 .spec{display:block;width:100%;height:58px}
@@ -101,6 +101,24 @@ nav.links a{text-decoration:none}
 .spec-legend{display:flex;gap:16px;flex-wrap:wrap;font-size:14.5px;color:var(--muted);font-style:italic;margin-top:4px}
 .spec-legend i{display:inline-block;width:18px;height:9px;border-radius:2px;margin-right:6px;vertical-align:middle;background:var(--accent);opacity:.75}
 .spec-legend i.line{background:none;border-top:1.6px dashed var(--ink);height:0;border-radius:0;opacity:1}
+
+/* ---- the big knob ---- */
+.thick{margin-top:34px;padding:34px;display:grid;grid-template-columns:330px 1fr;gap:44px;align-items:center}
+@media (max-width:860px){ .thick{grid-template-columns:1fr;padding:24px} }
+.knobbox{text-align:center}
+.knobbox .label{font-style:italic;font-size:26px}
+.bigknob{width:230px;height:230px;margin:8px auto 0;display:block;cursor:grab;touch-action:none;border-radius:50%;outline:none}
+.bigknob:active{cursor:grabbing}
+.bigknob:focus-visible{outline:2px dashed var(--ink);outline-offset:6px}
+.bigknob .cap{transition:transform .12s ease}
+.bigknob:active .cap{transform:scale(.985)}
+.readout{font-size:24px;margin-top:6px;font-variant-numeric:tabular-nums}
+.readout small{color:var(--muted);font-size:18px;font-style:italic}
+.knob-hint{color:var(--muted);font-style:italic;font-size:16px;margin-top:4px}
+.thick .demo-pic img{transition:opacity .08s linear;transform:none}
+.thick .demo-controls{justify-content:center}
+.bigknob .arc-bg{stroke:var(--track)} .bigknob .arc-val{stroke:var(--accent)}
+.bigknob .cap-face{fill:var(--sheet);stroke:var(--ink)} .bigknob .cap-shadow{fill:var(--shadow)} .bigknob .pointer{stroke:var(--ink)}
 
 /* ---- preset tour ---- */
 .tour{margin-top:34px;padding:34px;display:grid;grid-template-columns:1.25fr 1fr;gap:40px;align-items:start}
@@ -197,7 +215,7 @@ nav.links a{text-decoration:none}
 .swap{transition:opacity .25s ease,transform var(--d-smooth) var(--spring-smooth)}
 .swap.out{opacity:0;transform:translateY(8px)}
 .demo-controls{display:flex;align-items:center;gap:18px;margin-top:24px;flex-wrap:wrap}
-.demo .meta,.tour .meta{font-size:16px;color:var(--muted);font-style:italic;margin-top:14px}
+.demo .meta,.tour .meta,.thick .meta{font-size:16px;color:var(--muted);font-style:italic;margin-top:14px}
 .demo-pic{position:relative;aspect-ratio:744/358;border-radius:14px;overflow:hidden;border:1px solid var(--ink);background:var(--sheet);box-shadow:0 18px 44px var(--glow)}
 .demo-pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.04);
   transition:opacity .45s ease,transform var(--d-bouncy) var(--spring-bouncy)}
@@ -281,6 +299,7 @@ footer a{color:var(--muted)}
     <a class="brand" href="#"><b>TRAPO</b><i>by Chunche Labs</i></a>
     <nav class="links" aria-label="Sections">
       <a href="#listen" data-i18n="n.listen">listen</a>
+      <a href="#thickness" data-i18n="n.knob">thickness</a>
       <a href="#fabrics" data-i18n="n.fabrics">fabrics</a>
       <a href="#presets" data-i18n="n.presets">presets</a>
       <a href="#depth" data-i18n="n.depth">in depth</a>
@@ -352,6 +371,39 @@ footer a{color:var(--muted)}
         <div class="row2"><button class="switch" type="button" role="switch" aria-checked="true"><span class="track"><span class="knob"></span></span><span class="lbl">TRAPO on</span></button></div>
         <div class="spec-wrap"><canvas class="spec" aria-hidden="true"></canvas><div class="spec-legend" aria-hidden="true"><span><i></i><span data-i18n="sp.fill">what you hear</span></span><span><i class="line"></i><span data-i18n="sp.line">the other one</span></span></div></div>
         <div class="note" data-i18n="l.note4">The party next door.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THE BIG KNOB ============ -->
+<section id="thickness">
+  <div class="wrap">
+    <h2 class="reveal" data-i18n="t.title">Turn the big knob</h2>
+    <p class="lede reveal" data-i18n="t.lede">Thickness is TRAPO's main control: from one thin layer of wool to six. Drag it while it plays.</p>
+    <div class="thick sheet reveal" data-thick>
+      <div class="knobbox">
+        <div class="label">thickness</div>
+        <svg class="bigknob" viewBox="0 0 230 230" role="slider" tabindex="0" aria-label="Thickness" aria-valuemin="0" aria-valuemax="100" aria-valuenow="40" data-i18n-aria="t.knob">
+          <path class="arc-bg" fill="none" stroke-width="13" stroke-linecap="round"/>
+          <path class="arc-val" fill="none" stroke-width="13" stroke-linecap="round"/>
+          <g class="cap"><circle cx="115" cy="119" r="74" class="cap-shadow"/><circle cx="115" cy="115" r="74" class="cap-face" stroke-width="2.5"/>
+          <line class="pointer" x1="115" y1="115" x2="115" y2="62" stroke-width="5" stroke-linecap="round"/></g>
+        </svg>
+        <div class="readout"><span data-tval>40 %</span> <small>·</small> <span data-tlayers>3.0 layers</span></div>
+        <div class="knob-hint" data-i18n="t.hint">drag up or down, scroll, or use the arrow keys</div>
+        <div class="demo-controls playarea">
+          <button class="play" type="button" aria-label="Play the thickness demo" data-i18n-aria="t.play"><svg class="i-play" viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 2.5v11l9-5.5z" fill="currentColor"/></svg><svg class="i-pause" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5h3v11H4zM9 2.5h3v11H9z" fill="currentColor"/></svg></button>
+          <button class="switch" type="button" role="switch" aria-checked="true"><span class="track"><span class="knob"></span></span><span class="lbl">TRAPO on</span></button>
+        </div>
+      </div>
+      <div>
+        <div class="demo-pic" role="img" aria-label="The wool cloth in TRAPO, thicker as the knob turns" data-i18n-aria="t.pic">
+          <img class="day-only" data-k="0" src="assets/img/thick-0-day.jpg" alt="" loading="lazy"><img class="day-only" data-k="1" src="assets/img/thick-1-day.jpg" alt="" loading="lazy"><img class="day-only" data-k="2" src="assets/img/thick-2-day.jpg" alt="" loading="lazy"><img class="day-only" data-k="3" src="assets/img/thick-3-day.jpg" alt="" loading="lazy"><img class="day-only" data-k="4" src="assets/img/thick-4-day.jpg" alt="" loading="lazy"><img class="day-only" data-k="5" src="assets/img/thick-5-day.jpg" alt="" loading="lazy">
+          <img class="night-only" data-k="0" src="assets/img/thick-0-night.jpg" alt="" loading="lazy"><img class="night-only" data-k="1" src="assets/img/thick-1-night.jpg" alt="" loading="lazy"><img class="night-only" data-k="2" src="assets/img/thick-2-night.jpg" alt="" loading="lazy"><img class="night-only" data-k="3" src="assets/img/thick-3-night.jpg" alt="" loading="lazy"><img class="night-only" data-k="4" src="assets/img/thick-4-night.jpg" alt="" loading="lazy"><img class="night-only" data-k="5" src="assets/img/thick-5-night.jpg" alt="" loading="lazy">
+        </div>
+        <div class="spec-wrap"><canvas class="spec" aria-hidden="true"></canvas><div class="spec-legend" aria-hidden="true"><span><i></i><span data-i18n="sp.fill">what you hear</span></span><span><i class="line"></i><span data-i18n="sp.line">the other one</span></span></div></div>
+        <p class="meta" data-i18n="t.meta">Wool, everything else as TRAPO starts. Each step of the knob here is a real render through TRAPO, from 1 to 6 layers; in between, the page blends the two nearest.</p>
       </div>
     </div>
   </div>
@@ -543,7 +595,7 @@ footer a{color:var(--muted)}
   const store = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} } };
   /* ---------- words: English is in the page itself; Spanish here ---------- */
   const ES = {
-    "n.listen": "escuchar", "n.fabrics": "telas", "n.presets": "presets", "n.depth": "a fondo", "n.faq": "preguntas", "n.download": "descarga gratis",
+    "n.listen": "escuchar", "n.knob": "thickness", "n.fabrics": "telas", "n.presets": "presets", "n.depth": "a fondo", "n.faq": "preguntas", "n.download": "descarga gratis",
     "h.kicker": "trapo (m.): pedazo de tela que sirve para todo.",
     "h.title": "Échale un trapo<br>a tu sonido.",
     "h.pitch": "Un efecto de audio que funciona como tela de verdad. Elige una tela, decide cuántas capas, y escucha tu batería, tus teclados o tu voz suavizarse, engrosarse y respirar, como cuando le tiras algo encima al parlante.",
@@ -556,6 +608,10 @@ footer a{color:var(--muted)}
     "l.note1": "Un loop boom-bap se vuelve suave, con aire de cuarto.", "l.note2": "Un piano eléctrico se vuelve cálido y cercano.",
     "l.note3": "Un bajo de sintetizador se redondea, con los agudos guardados.", "l.note4": "La fiesta del vecino.",
     "sp.fill": "lo que escuchas", "sp.line": "la otra versión",
+    "t.title": "Gira la perilla grande",
+    "t.lede": "Thickness es el control principal de TRAPO: de una capa fina de lana a seis. Arrástrala mientras suena.",
+    "t.hint": "arrastra hacia arriba o abajo, usa la rueda o las flechas",
+    "t.meta": "Lana, todo lo demás como arranca TRAPO. Cada paso de la perilla aquí es un render real por TRAPO, de 1 a 6 capas; en medio, la página mezcla los dos más cercanos.",
     "f.title": "Elige una tela", "f.lede": "Cinco telas, cada una con su tejido, su tacto y su grano. Cambia mientras suena.",
     "f.meta": "El mismo beat por cada tela al 55 % de thickness, todo lo demás como arranca TRAPO. El volumen se mantiene, así que escuchas el color, no el volumen.",
     "p.title": "Prueba los presets", "p.lede": "Ocho de los 167, sobre el mismo beat. Toca uno mientras suena.",
@@ -599,7 +655,7 @@ footer a{color:var(--muted)}
   };
   const ES_ARIA = {
     "h.video": "La ventana de TRAPO: una tela de lana con ojos de fantasma sobre un parlante, con una pesa encima, respirando con el beat",
-    "h.play": "Reproducir el beat", "p.play": "Reproducir los presets", "p.group": "Preset"
+    "h.play": "Reproducir el beat", "t.play": "Reproducir la demo de thickness", "t.knob": "Thickness", "t.pic": "La tela de lana en TRAPO, más gruesa a medida que giras la perilla", "p.play": "Reproducir los presets", "p.group": "Preset"
   };
   const WORDS = {
     en: { dl: k => `Download for ${k === "mac" ? "Mac" : "Windows"}`, ver: v => `Free · version ${v}`, flip: "turn the card over", flipBack: "turn it back",
@@ -607,13 +663,13 @@ footer a{color:var(--muted)}
           title: "TRAPO by Chunche Labs: throw one over your sound",
           desc: "TRAPO is an audio effect that works like real cloth. Pick a fabric, choose how many layers, and hear your sound soften, thicken and breathe. Free during the beta. VST3, AU and CLAP for Mac and Windows.",
           join: "mailto:tavolagoss.beats@gmail.com?subject=TRAPO%20early-user%20list&body=Please%20add%20me%20to%20the%20TRAPO%20early-user%20list.",
-          workflow: "Everything around the sound." },
+          workflow: "Everything around the sound.", layers: n => `${n.toFixed(1)} layers` },
     es: { dl: k => `Descargar para ${k === "mac" ? "Mac" : "Windows"}`, ver: v => `Gratis · versión ${v}`, flip: "voltear la tarjeta", flipBack: "volver al frente",
           front: "al frente", back: "atrás", card: (k, side) => `La tarjeta ${k}, ${side === "front" ? "frente" : "reverso"}`, play: "Reproducir", pause: "Pausa",
           title: "TRAPO de Chunche Labs: échale un trapo a tu sonido",
           desc: "TRAPO es un efecto de audio que funciona como tela de verdad. Elige una tela, decide cuántas capas, y escucha tu sonido suavizarse, engrosarse y respirar. Gratis durante la beta. VST3, AU y CLAP para Mac y Windows.",
           join: "mailto:tavolagoss.beats@gmail.com?subject=TRAPO%20lista%20de%20usuarios%20tempranos&body=Por%20favor%20agr%C3%A9game%20a%20la%20lista%20de%20usuarios%20tempranos%20de%20TRAPO.",
-          workflow: "Todo lo que rodea al sonido." }
+          workflow: "Todo lo que rodea al sonido.", layers: n => `${n.toFixed(1).replace(".", ",")} capas` }
   };
   const FAB = {
     en: { silk: "Light and airy. Smooths the edges and leaves the shine, with a satin sheen and a wide shimmer.",
@@ -849,7 +905,7 @@ footer a{color:var(--muted)}
       this.nodes = { master, t0, srcs: {}, gains: {}, ans: {} };
       this.names.forEach((n, i) => {
         const s = c.createBufferSource(); s.buffer = bufs[i]; s.loop = true; s.loopStart = LOOP_START; s.loopEnd = Math.min(LOOP_END, bufs[i].duration);
-        const g = c.createGain(); g.gain.value = n === this.sel ? 1 : 0;
+        const g = c.createGain(); g.gain.value = this.gainsWanted ? (this.gainsWanted[n] || 0) : (n === this.sel ? 1 : 0);
         const an = c.createAnalyser(); an.fftSize = 4096; an.smoothingTimeConstant = 0.8; an.minDecibels = -110; an.maxDecibels = -10;
         s.connect(g).connect(master); s.connect(an).connect(sink); s.start(t0, 0);
         this.nodes.srcs[n] = s; this.nodes.gains[n] = g; this.nodes.ans[n] = an;
@@ -865,6 +921,12 @@ footer a{color:var(--muted)}
       if (!this.nodes) return;
       const t = audioCtx().currentTime;
       Object.entries(this.nodes.gains).forEach(([n, g]) => { g.gain.cancelScheduledValues(t); g.gain.setTargetAtTime(n === name ? 1 : 0, t, 0.012); });
+    }
+    mixTo(gains, tc = 0.03) {                     // several sources at once (the knob blends two renders)
+      this.gainsWanted = gains;
+      if (!this.nodes) return;
+      const t = audioCtx().currentTime;
+      Object.entries(this.nodes.gains).forEach(([n, g]) => { g.gain.cancelScheduledValues(t); g.gain.setTargetAtTime(gains[n] || 0, t, tc); });
     }
     stop() {
       if (!this.nodes) return;
@@ -958,6 +1020,53 @@ footer a{color:var(--muted)}
     addEventListener("resize", moveIndicator); requestAnimationFrame(moveIndicator);
     if (document.fonts) document.fonts.ready.then(moveIndicator);
     $(".playarea", demo).classList.add("demo-play");
+  }
+
+  /* the big knob */
+  const thick = $("[data-thick]");
+  let renderKnob = () => {};
+  if (thick) {
+    const names = [0, 1, 2, 3, 4, 5].map(k => `thick-${k}`).concat("beat-dry");
+    let value = 40, on = true;
+    const lp = new Looper($(".playarea", thick), names, { canvas: $("canvas.spec", thick), other: sel => sel === "beat-dry" ? `thick-${Math.round(value / 20)}` : "beat-dry" });
+    const knob = $(".bigknob", thick), A0 = -135, A1 = 135, R = 98, C = 115;
+    const pt = a => { const r = (a - 90) * Math.PI / 180; return [C + R * Math.cos(r), C + R * Math.sin(r)]; };
+    const arc = (a0, a1) => { const [x0, y0] = pt(a0), [x1, y1] = pt(a1); return `M${x0.toFixed(2)} ${y0.toFixed(2)}A${R} ${R} 0 ${a1 - a0 > 180 ? 1 : 0} 1 ${x1.toFixed(2)} ${y1.toFixed(2)}`; };
+    $(".arc-bg", knob).setAttribute("d", arc(A0, A1));
+    const imgs = $$(".demo-pic img", thick);
+    const apply = () => {
+      const p = value / 20, i = Math.min(4, Math.floor(p)), f = p - i, gains = {};
+      if (on) { gains[`thick-${i}`] = Math.cos(f * Math.PI / 2); gains[`thick-${i + 1}`] = Math.sin(f * Math.PI / 2); }
+      else gains["beat-dry"] = 1;
+      lp.sel = on ? `thick-${Math.round(p)}` : "beat-dry";
+      lp.mixTo(gains);
+      imgs.forEach(im => { const k = +im.dataset.k; im.style.opacity = k === i ? 1 : k === i + 1 ? f : 0; im.style.zIndex = k === i ? 1 : 2; });
+    };
+    renderKnob = () => {
+      const a = A0 + (A1 - A0) * value / 100;
+      $(".arc-val", knob).setAttribute("d", value > 0.5 ? arc(A0, a) : "M0 0");
+      $(".pointer", knob).setAttribute("transform", `rotate(${a.toFixed(2)} ${C} ${C})`);
+      knob.setAttribute("aria-valuenow", Math.round(value));
+      knob.setAttribute("aria-valuetext", `${Math.round(value)} %, ${W().layers(1 + value / 20)}`);
+      $("[data-tval]", thick).textContent = `${Math.round(value)} %`;
+      $("[data-tlayers]", thick).textContent = W().layers(1 + value / 20);
+    };
+    const set = v => { value = Math.max(0, Math.min(100, v)); renderKnob(); apply(); };
+    let drag = null;
+    knob.addEventListener("pointerdown", e => { drag = { y: e.clientY, x: e.clientX, v: value }; knob.setPointerCapture(e.pointerId); knob.focus({ preventScroll: true }); e.preventDefault(); });
+    knob.addEventListener("pointermove", e => { if (!drag) return; const d = (drag.y - e.clientY) + (e.clientX - drag.x) * 0.6; set(drag.v + d * (e.shiftKey ? 0.1 : 0.45)); });
+    const end = () => drag = null;
+    knob.addEventListener("pointerup", end); knob.addEventListener("pointercancel", end);
+    knob.addEventListener("wheel", e => { e.preventDefault(); set(value - Math.sign(e.deltaY) * (e.shiftKey ? 1 : 4)); }, { passive: false });
+    knob.addEventListener("keydown", e => {
+      const step = e.shiftKey ? 1 : 5, k = e.key;
+      const d = k === "ArrowUp" || k === "ArrowRight" ? step : k === "ArrowDown" || k === "ArrowLeft" ? -step : k === "PageUp" ? 20 : k === "PageDown" ? -20 : null;
+      if (k === "Home") { e.preventDefault(); set(0); } else if (k === "End") { e.preventDefault(); set(100); } else if (d !== null) { e.preventDefault(); set(value + d); }
+    });
+    knob.addEventListener("dblclick", () => set(40));
+    $(".play", thick).addEventListener("click", () => lp.toggle());
+    wireSwitch($(".switch", thick), v => { on = v; apply(); });
+    set(40);
   }
 
   /* preset tour */
@@ -1061,7 +1170,7 @@ footer a{color:var(--muted)}
     document.title = W().title; $('meta[name="description"]').content = W().desc;
     $$("[data-join]").forEach(a => a.href = W().join);
     $$(".play").forEach(b => { if (!b.closest(".playing")) b.setAttribute("aria-label", b.dataset.i18nAria ? b.getAttribute("aria-label") : W().play); });
-    renderDownloads(); renderVersion(); buildPanels(); renderTour();
+    renderDownloads(); renderVersion(); buildPanels(); renderTour(); renderKnob();
     if (demo) showFabricText();
     requestAnimationFrame(moveTab);
     if (save) store.set("trapo-lang", lang);
