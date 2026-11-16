@@ -123,6 +123,7 @@ nav.links a{text-decoration:none}
 .readout small{color:var(--muted);font-size:18px;font-style:italic}
 .knob-hint{color:var(--muted);font-style:italic;font-size:16px;margin-top:4px}
 .pg .demo-controls{justify-content:center}
+.pg .demo-pic .lift{position:absolute;inset:0;z-index:5;opacity:0;background-repeat:no-repeat;background-size:100% 800%;background-position:0 0;pointer-events:none}
 @media (min-width:861px){ .pg .chip{flex-direction:row;justify-content:center;gap:12px;padding:12px 10px;font-size:20px} .pg .chip svg{width:30px;height:30px} }
 .bigknob .arc-bg{stroke:var(--track)} .bigknob .arc-val{stroke:var(--accent)}
 .bigknob .cap-face{fill:var(--sheet);stroke:var(--ink)} .bigknob .cap-shadow{fill:var(--shadow)} .bigknob .pointer{stroke:var(--ink)}
@@ -409,7 +410,7 @@ footer a{color:var(--muted)}
           <div class="knob-hint" data-i18n="t.hint">drag up or down, scroll, or use the arrow keys</div>
         </div>
         <div>
-          <div class="demo-pic" role="img" aria-label="The cloth in TRAPO, in the chosen fabric and thickness" data-i18n-aria="t.pic"><img class="day-only" data-k="0" alt=""><img class="day-only" data-k="1" alt=""><img class="day-only" data-k="2" alt=""><img class="day-only" data-k="3" alt=""><img class="day-only" data-k="4" alt=""><img class="day-only" data-k="5" alt=""><img class="night-only" data-k="0" alt=""><img class="night-only" data-k="1" alt=""><img class="night-only" data-k="2" alt=""><img class="night-only" data-k="3" alt=""><img class="night-only" data-k="4" alt=""><img class="night-only" data-k="5" alt=""></div>
+          <div class="demo-pic" role="img" aria-label="The cloth in TRAPO, in the chosen fabric and thickness" data-i18n-aria="t.pic"><img class="day-only" data-k="0" alt=""><img class="day-only" data-k="1" alt=""><img class="day-only" data-k="2" alt=""><img class="day-only" data-k="3" alt=""><img class="day-only" data-k="4" alt=""><img class="day-only" data-k="5" alt=""><img class="night-only" data-k="0" alt=""><img class="night-only" data-k="1" alt=""><img class="night-only" data-k="2" alt=""><img class="night-only" data-k="3" alt=""><img class="night-only" data-k="4" alt=""><img class="night-only" data-k="5" alt=""><div class="lift" aria-hidden="true"></div></div>
           <div class="fabric-text swap" aria-live="polite"><h3 data-fname>wool</h3><p data-fdesc>Warm and cosy, with hairy fuzz, a round low end and a little bounce.</p></div>
         </div>
       </div>
@@ -1024,7 +1025,38 @@ footer a{color:var(--muted)}
         assign(); blendPics(); requestAnimationFrame(() => pic.classList.remove("fading"));
       });
     };
-    const apply = () => { lp.sel = on ? `pg-${fabric}-${Math.round(value / 20)}` : "beat-dry"; lp.mixTo(gainsNow()); blendPics(); };
+    // TRAPO off: the cloth lifts off the speaker, as in the plugin (8 rendered frames per fabric and thickness)
+    const liftEl = $(".lift", pgEl);
+    const look = () => document.documentElement.dataset.theme === "night" ? "night" : "day";
+    const liftUrl = () => `assets/img/lift-${fabric}-${Math.round(value / 20)}-${look()}.webp`;
+    let liftRun = 0, lifted = false;
+    const frame = f => { liftEl.style.backgroundPosition = `0 ${(f / 7 * 100).toFixed(3)}%`; };
+    const withSprite = (url, then) => { const im = new Image(); im.onload = im.onerror = then; im.src = url; };
+    const animateLift = up => {
+      const id = ++liftRun, url = liftUrl();
+      lifted = up;
+      withSprite(url, () => {
+        if (id !== liftRun) return;
+        liftEl.style.backgroundImage = `url("${url}")`;
+        if (reduce) { frame(7); liftEl.style.opacity = up ? 1 : 0; return; }
+        liftEl.style.opacity = 1;
+        const t0 = performance.now(), dur = 440;
+        const step = now => {
+          if (id !== liftRun) return;
+          const x = Math.min(1, (now - t0) / dur), f = Math.min(7, Math.floor(x * 8));
+          frame(up ? f : 7 - f);
+          if (x < 1) requestAnimationFrame(step); else if (!up) liftEl.style.opacity = 0;
+        };
+        requestAnimationFrame(step);
+      });
+    };
+    const refreshLift = () => {                   // knob, fabric or look changed while the cloth is up
+      if (!lifted) return;
+      const id = ++liftRun, url = liftUrl();
+      withSprite(url, () => { if (id !== liftRun) return; liftEl.style.backgroundImage = `url("${url}")`; frame(7); liftEl.style.opacity = 1; });
+    };
+    new MutationObserver(refreshLift).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+    const apply = () => { lp.sel = on ? `pg-${fabric}-${Math.round(value / 20)}` : "beat-dry"; lp.mixTo(gainsNow()); blendPics(); refreshLift(); };
 
     // the knob
     const knob = $(".bigknob", pgEl), A0 = -135, A1 = 135, R = 98, C = 115;
@@ -1065,7 +1097,7 @@ footer a{color:var(--muted)}
       fabric = chip.dataset.fabric; moveIndicator();
       lp.rebase(stepNames(fabric).concat("beat-dry"), gainsNow());
       lp.sel = on ? `pg-${fabric}-${Math.round(value / 20)}` : "beat-dry";
-      setPics(fabric, true);
+      setPics(fabric, true); refreshLift();
       text.classList.add("out");
       setTimeout(() => { showFabricText(); text.classList.remove("out"); }, 160);
     };
@@ -1081,7 +1113,7 @@ footer a{color:var(--muted)}
     if (document.fonts) document.fonts.ready.then(moveIndicator);
 
     $(".play", pgEl).addEventListener("click", () => lp.toggle());
-    wireSwitch($(".switch", pgEl), v => { on = v; apply(); });
+    wireSwitch($(".switch", pgEl), v => { on = v; animateLift(!v); lp.sel = on ? `pg-${fabric}-${Math.round(value / 20)}` : "beat-dry"; lp.mixTo(gainsNow()); });
     setPics(fabric, false); set(40);
   }
 
